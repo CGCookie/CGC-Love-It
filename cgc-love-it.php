@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CGC Love It
  * Description: Love functionality from the cgcookie theme
- * 
+ *
  */
 
 // check whether a user has loved a post / iamge
@@ -32,6 +32,7 @@ function cgc_mark_post_as_loved($post_id, $user_id) {
 	if(update_post_meta($post_id, '_cgc_love_count', $love_count)) {
 		if(is_user_logged_in()) {
 			cgc_store_loved_id_for_user($user_id, $post_id);
+			do_action( 'cgc_post_loved', $user_id, $post_id );
 		}
 		return true;
 	}
