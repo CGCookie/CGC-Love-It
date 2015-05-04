@@ -16,7 +16,7 @@ class CGC_LOVEIT_DB {
 	}
 
 	/**
-	*	Add a single follower
+	*	Add a love
 	*
 	*	@since 5.0
 	*/
@@ -50,5 +50,30 @@ class CGC_LOVEIT_DB {
 		return false;
 	}
 
+	/**
+	*	Remove a love
+	*
+	*	@since 5.0
+	*/
+	public function remove_love( $args = array() ) {
+
+	}
+
+	/**
+	*	Get the number of loves for a specific post id
+	*
+	*	@since 5.0
+	*/
+	public function get_loves( $post_id = 0 ) {
+
+		global $wpdb;
+
+		if ( empty( $post_id ) )
+			return;
+
+		$result = $wpdb->get_results( $wpdb->prepare( "SELECT post_id FROM {$this->table} WHERE `post_id` = '%d'; ", absint( $post_id ) ) );
+
+		return $result;
+	}
 
 }
