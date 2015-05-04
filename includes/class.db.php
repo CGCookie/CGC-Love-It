@@ -68,12 +68,27 @@ class CGC_LOVEIT_DB {
 
 		global $wpdb;
 
-		if ( empty( $post_id ) )
-			return;
-
 		$result = $wpdb->get_results( $wpdb->prepare( "SELECT post_id FROM {$this->table} WHERE `post_id` = '%d'; ", absint( $post_id ) ) );
 
 		return $result;
+	}
+
+	/**
+	*	Has this user loved a specific post id
+	*
+	*	@param $user_id int id of the user we're checking for
+	*	@param $post_id int id of the post we're cecking to see if the user loved
+	*/
+	public function has_loved( $user_id = 0, $post_id = 0 ) {
+
+		global $wpdb;
+
+		$result = $wpdb->get_results( $wpdb->prepare( "SELECT user_id FROM {$this->table} WHERE `post_id` = '%d' AND `user_id` = '%d'; ", absint( $post_id ), absint( $user_id ) ) );
+
+		if ( $result )
+			return $result;
+		else
+			return false;
 	}
 
 }

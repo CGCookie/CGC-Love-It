@@ -15,6 +15,11 @@ function cgc_love_something( $current_user = 0, $post_id = 0 ) {
 	if ( empty( $current_user ) )
 		$current_user = get_current_user_ID();
 
+	$has_loved = cgc_has_user_loved( $current_user, $post_id );
+
+	if ( false !== $has_loved )
+		return;
+
 	$db = new CGC_LOVEIT_DB;
 
 	$args = array(
@@ -40,4 +45,15 @@ function cgc_get_loves( $post_id = 0 ) {
 
 	return count($out);
 
+}
+
+function cgc_has_user_loved( $user_id = 0, $post_id = 0 ) {
+
+	if ( empty( $user_id ) || empty( $post_id ) )
+		return;
+
+	$db = new CGC_LOVEIT_DB;
+	$out = $db->has_loved( $user_id , $post_id );
+
+	return $out;
 }
