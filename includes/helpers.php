@@ -9,25 +9,21 @@
 */
 function cgc_love_something( $user_id = 0, $post_id = 0 ) {
 
+	// if user is empty grab the current
 	if ( empty( $user_id ) )
 		$user_id = get_current_user_ID();
 
+	// if teh post id is empty grab the current
 	if ( empty( $post_id ) )
 		$post_id = get_the_ID();
 
-	$has_loved = cgc_has_user_loved( $user_id, $post_id );
-
-	if ( false !== $has_loved )
+	// bail out if this user has already loved this item
+	if ( false !== cgc_has_user_loved( $user_id, $post_id ) )
 		return;
 
+	// add the love
 	$db = new CGC_LOVEIT_DB;
-
-	$args = array(
-		'user_id' 	=> $user_id,
-		'post_id'	=> $post_id
-	);
-
-	$db->add_love( $args );
+	$db->add_love( array( 'user_id' => $user_id, 'post_id' => $post_id ) );
 }
 
 /**
@@ -55,12 +51,15 @@ function cgc_get_loves( $post_id = 0 ) {
 */
 function cgc_has_user_loved( $user_id = 0, $post_id = 0 ) {
 
+	// if user is empty grab the current
 	if ( empty( $user_id ) )
 		$user_id = get_current_user_ID();
 
+	// if teh post id is empty grab the current
 	if ( empty( $post_id ) )
 		$post_id = get_the_ID();
 
+	// return result
 	$db = new CGC_LOVEIT_DB;
 	$out = $db->has_loved( $user_id , $post_id );
 
