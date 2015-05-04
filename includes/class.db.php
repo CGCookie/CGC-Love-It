@@ -74,6 +74,20 @@ class CGC_LOVEIT_DB {
 	}
 
 	/**
+	*	Get the number of loves for a specific user
+	*
+	*	@since 5.0
+	*/
+	public function get_user_loves( $user_id = 0 ) {
+
+		global $wpdb;
+
+		$result = $wpdb->get_results( $wpdb->prepare( "SELECT post_id FROM {$this->table} WHERE `user_id` = '%d'; ", absint( $user_id ) ) );
+
+		return $result;
+	}
+
+	/**
 	*	Has this user loved a specific post id
 	*
 	*	@param $user_id int id of the user we're checking for

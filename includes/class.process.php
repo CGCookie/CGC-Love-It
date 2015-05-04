@@ -26,7 +26,6 @@ class cgcProcessLoving {
 
 			if ( $_POST['action'] == 'process_love' && wp_verify_nonce( $_POST['nonce'], 'process_love' )  ) {
 
-
 				// bail out if this user has already loved this item
 				if ( cgc_has_user_loved( $user_id, $post_id ) ) {
 

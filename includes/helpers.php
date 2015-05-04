@@ -31,7 +31,7 @@ function cgc_love_something( $user_id = 0, $post_id = 0 ) {
 *	@param $post_id int id of the post that we're getting the loves for
 *	@since 5.0
 */
-function cgc_get_loves( $post_id = 0 ) {
+function cgc_get_loves( $post_id = 0, $count = true ) {
 
 	if ( empty( $post_id ) )
 		$post_id = get_the_ID();
@@ -39,7 +39,24 @@ function cgc_get_loves( $post_id = 0 ) {
 	$db = new CGC_LOVEIT_DB;
 	$out = $db->get_loves( $post_id );
 
-	return count($out);
+	return true == $count ? count( $out ) : $out;
+
+}
+
+/**
+*	Get the items a specific user has loved
+*	@param $user_id int id of the user that we're getting items for
+*	@since 5.0
+*/
+function cgc_get_users_loves( $user_id = 0, $count = false ) {
+
+	if ( empty( $user_id ) )
+		return;
+
+	$db = new CGC_LOVEIT_DB;
+	$out = $db->get_user_loves( $user_id );
+
+	return true == $count ? count( $out ) : $out;
 
 }
 
