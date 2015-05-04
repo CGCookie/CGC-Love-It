@@ -23,7 +23,7 @@ function cgc_love_something( $user_id = 0, $post_id = 0 ) {
 
 	// add the love
 	$db = new CGC_LOVEIT_DB;
-	$db->add_love( array( 'user_id' => $user_id, 'post_id' => $post_id ) );
+	$out =  $db->add_love( array( 'user_id' => $user_id, 'post_id' => $post_id ) );
 }
 
 /**

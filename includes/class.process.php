@@ -27,13 +27,19 @@ class cgcProcessLoving {
 			if ( $_POST['action'] == 'process_love' && wp_verify_nonce( $_POST['nonce'], 'process_love' )  ) {
 
 
-	    		// do lovin
-	    		cgc_love_something( $user_id, $post_id );
+				// bail out if this user has already loved this item
+				if ( cgc_has_user_loved( $user_id, $post_id ) ) {
 
+					wp_send_json_success( array('message' => 'already-loved') );
 
-	    		//var_dump('madeit');wp_die();
+				} else {
 
-		        wp_send_json_success();
+					cgc_love_something( $user_id, $post_id );
+
+					do_action('cgc_user_loved', $user_id, $post_id );
+
+					wp_send_json_success( array( 'message'=> 'loved' ) );
+				}
 
 			} elseif ( $_POST['action'] == 'process_unlove' && wp_verify_nonce( $_POST['nonce'], 'process_love' ) ) {
 
