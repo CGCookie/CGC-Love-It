@@ -3,19 +3,19 @@
 /**
 *	Love something
 *
-*	@param $current_user int id of the current user doing the loving
+*	@param $user_id int id of the current user doing the loving
 *	@param $post_id int id of the post the user is loving
 *	@since 5.0
 */
-function cgc_love_something( $current_user = 0, $post_id = 0 ) {
+function cgc_love_something( $user_id = 0, $post_id = 0 ) {
+
+	if ( empty( $user_id ) )
+		$user_id = get_current_user_ID();
 
 	if ( empty( $post_id ) )
-		return;
+		$post_id = get_the_ID();
 
-	if ( empty( $current_user ) )
-		$current_user = get_current_user_ID();
-
-	$has_loved = cgc_has_user_loved( $current_user, $post_id );
+	$has_loved = cgc_has_user_loved( $user_id, $post_id );
 
 	if ( false !== $has_loved )
 		return;
@@ -23,7 +23,7 @@ function cgc_love_something( $current_user = 0, $post_id = 0 ) {
 	$db = new CGC_LOVEIT_DB;
 
 	$args = array(
-		'user_id' 	=> $current_user,
+		'user_id' 	=> $user_id,
 		'post_id'	=> $post_id
 	);
 
@@ -47,10 +47,19 @@ function cgc_get_loves( $post_id = 0 ) {
 
 }
 
+/**
+*	Check if a user has loved something
+*	@param $user_id int id of the user that we're checking for
+*	@param $post_id int id of the post that we're checking
+*	@since 5.0
+*/
 function cgc_has_user_loved( $user_id = 0, $post_id = 0 ) {
 
-	if ( empty( $user_id ) || empty( $post_id ) )
-		return;
+	if ( empty( $user_id ) )
+		$user_id = get_current_user_ID();
+
+	if ( empty( $post_id ) )
+		$post_id = get_the_ID();
 
 	$db = new CGC_LOVEIT_DB;
 	$out = $db->has_loved( $user_id , $post_id );
