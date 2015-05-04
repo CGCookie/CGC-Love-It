@@ -26,7 +26,12 @@ class cgcProcessLoving {
 
 			if ( $_POST['action'] == 'process_love' && wp_verify_nonce( $_POST['nonce'], 'process_love' )  ) {
 
+
 	    		// do lovin
+	    		cgc_love_something( $user_id, $post_id );
+
+
+	    		//var_dump('madeit');wp_die();
 
 		        wp_send_json_success();
 

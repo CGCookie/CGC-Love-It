@@ -35,7 +35,7 @@ class CGC_LOVEIT_DB {
 			$wpdb->prepare(
 				"INSERT INTO {$this->table} SET
 					`user_id`  		= '%d',
-					`post-id`  		= '%d'
+					`post_id`  		= '%d'
 				;",
 				absint( $args['user_id'] ),
 				absint( $args['post_id'] )
