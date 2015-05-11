@@ -20,6 +20,8 @@ class cgcProcessLoving {
 	    	$user_id 	= get_current_user_id();
 
 	    	$post_id 	= isset( $_POST['post_id'] ) ? $_POST['post_id'] : false;
+	    	$author     = $post_id ? get_post( $post_id )->post_author : false;
+
 
 	    	if ( empty ( $post_id ) )
 	    		return;
@@ -30,6 +32,10 @@ class cgcProcessLoving {
 				if ( cgc_has_user_loved( $user_id, $post_id ) ) {
 
 					wp_send_json_success( array('message' => 'already-loved') );
+
+				} else if ( $user_id == $author ) {
+
+					wp_send_json_success( array('message' => 'self-lovin') );
 
 				} else {
 
