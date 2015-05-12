@@ -82,3 +82,34 @@ function cgc_has_user_loved( $user_id = 0, $post_id = 0 ) {
 
 	return $out;
 }
+
+/**
+*	Get the total number of loves a user has recieved on tehir images
+*
+*/
+function cgc_get_users_total_loves( $user_id = 0 ){
+
+	if ( empty( $user_id ) )
+		$user_id = get_current_user_ID();
+
+	$images = function_exists('cgc_gallery_get_users_images') ? cgc_gallery_get_users_images( $user_id ) : false;
+
+	$loves = '';
+	if ( $images ) {
+
+		foreach ($images as $image) {
+
+			// find loves for iamges
+			$loves = count( cgc_get_loves( $image ) );
+
+		}
+	}
+
+	return $loves ? count( $loves ) : '0';
+}
+
+
+
+
+
+
