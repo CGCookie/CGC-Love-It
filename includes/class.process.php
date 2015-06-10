@@ -17,11 +17,12 @@ class cgcProcessLoving {
 
 		if ( isset( $_POST['action'] ) ) {
 
+			global $post;
+
 	    	$user_id 	= get_current_user_id();
 
 	    	$post_id 	= isset( $_POST['post_id'] ) ? $_POST['post_id'] : false;
 	    	$author     = $post_id ? get_post( $post_id )->post_author : false;
-
 
 	    	if ( empty ( $post_id ) )
 	    		return;
