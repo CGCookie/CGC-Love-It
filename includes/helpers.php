@@ -100,12 +100,12 @@ function cgc_get_users_total_loves( $user_id = 0 ){
 		foreach ($images as $image) {
 
 			// find loves for iamges
-			$loves = count( cgc_get_loves( $image ) );
+			$loves += cgc_get_loves( $image );
 
 		}
 	}
 
-	return $loves ? count( $loves ) : '0';
+	return $loves ? $loves : '0';
 }
 
 
