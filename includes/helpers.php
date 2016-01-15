@@ -1,6 +1,28 @@
 <?php
 
 /**
+*	UnLove something
+*
+*	@param $user_id int id of the current user doing the loving
+*	@param $post_id int id of the post the user is loving
+*	@since 5.0
+*/
+function cgc_unlove_something( $user_id = 0, $post_id = 0 ) {
+
+	// if user is empty grab the current
+	if ( empty( $user_id ) )
+		$user_id = get_current_user_ID();
+
+	// if teh post id is empty grab the current
+	if ( empty( $post_id ) )
+		$post_id = get_the_ID();
+
+	// add the love
+	$db = new CGC_LOVEIT_DB;
+	$out =  $db->remove_love( array( 'user_id' => $user_id, 'post_id' => $post_id ) );
+}
+
+/**
 *	Love something
 *
 *	@param $user_id int id of the current user doing the loving
@@ -107,9 +129,3 @@ function cgc_get_users_total_loves( $user_id = 0 ){
 
 	return $loves ? $loves : '0';
 }
-
-
-
-
-
-

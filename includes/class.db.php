@@ -57,6 +57,25 @@ class CGC_LOVEIT_DB {
 	*/
 	public function remove_love( $args = array() ) {
 
+		global $wpdb;
+
+		$defaults = array(
+			'user_id'		=> '',
+			'post_id'		=> ''
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		$remove = $wpdb->query(
+			$wpdb->prepare(
+				"DELETE FROM {$this->table} WHERE post_id = %d AND user_id = %d;", absint( $args['post_id'] ), absint( $args['user_id'] )
+		    )
+		);
+
+		do_action( 'cgc_love_removed', $args );
+
+		return $remove ? true : false;
+
 	}
 
 	/**

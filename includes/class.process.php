@@ -49,9 +49,9 @@ class cgcProcessLoving {
 
 			} elseif ( $_POST['action'] == 'process_unlove' && wp_verify_nonce( $_POST['nonce'], 'process_love' ) ) {
 
-	    		// do unlovin
+	    		cgc_unlove_something( $user_id, $post_id );
 
-		        wp_send_json_success();
+		       	wp_send_json_success( array( 'message'=> 'un-loved' ) );
 
 			} else {
 
