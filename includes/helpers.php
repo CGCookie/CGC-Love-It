@@ -53,7 +53,7 @@ function cgc_love_something( $user_id = 0, $post_id = 0 ) {
 *	@param $post_id int id of the post that we're getting the loves for
 *	@since 5.0
 */
-function cgc_get_loves( $post_id = 0, $count = true ) {
+function cgc_get_loves( $post_id = 0 ) {
 
 	if ( empty( $post_id ) )
 		$post_id = get_the_ID();
@@ -61,7 +61,7 @@ function cgc_get_loves( $post_id = 0, $count = true ) {
 	$db = new CGC_LOVEIT_DB;
 	$out = $db->get_loves( $post_id );
 
-	return true == $count ? count( $out ) : $out;
+	return $out ? $out : 0;
 
 }
 
