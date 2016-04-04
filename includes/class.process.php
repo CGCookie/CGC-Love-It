@@ -22,7 +22,16 @@ class cgcProcessLoving {
 	    	$user_id 	= get_current_user_id();
 
 	    	$post_id 	= isset( $_POST['post_id'] ) ? $_POST['post_id'] : false;
-	    	$author     = $post_id ? get_post( $post_id )->post_author : false;
+	    	$location 	= isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : false;
+
+	    	if( 'live-session' == $location ) {
+
+	    		$author = function_exists('cgc_get_single_discussion') && isset( $post_id ) ? cgc_get_single_discussion( $post_id )->author_id : false;
+
+	    	} else {
+
+	    		$author     = $post_id ? get_post( $post_id )->post_author : false;
+	    	}
 
 	    	if ( empty ( $post_id ) )
 	    		return;
