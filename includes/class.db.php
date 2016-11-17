@@ -87,7 +87,7 @@ class CGC_LOVEIT_DB {
 
 		global $wpdb;
 
-		$result = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$this->table} WHERE `post_id` = '%d'; ", absint( $post_id ) ) );
+		$result = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(post_id) FROM {$this->table} WHERE `post_id` = '%d'; ", absint( $post_id ) ) );
 
 		return $result;
 	}
