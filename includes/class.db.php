@@ -11,7 +11,6 @@ class CGC_LOVEIT_DB {
 		global $wpdb;
 
 		$this->table   		= $wpdb->base_prefix . 'cgc_loveit';
-		$this->view   		= $wpdb->base_prefix . 'cgc_loveit_count';
 		$this->db_version = '1.0';
 
 	}
@@ -88,7 +87,7 @@ class CGC_LOVEIT_DB {
 
 		global $wpdb;
 
-		$result = $wpdb->get_var( $wpdb->prepare( "SELECT total_count FROM {$this->view} WHERE `post_id` = '%d'; ", absint( $post_id ) ) );
+		$result = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$this->table} WHERE `post_id` = '%d'; ", absint( $post_id ) ) );
 
 		return $result;
 	}
