@@ -10,7 +10,7 @@
  * Plugin Name:       CGC Love It
  * Plugin URI:        http://cgcookie.com
  * Description:       Creates a social following/follower system
- * Version:           5.2
+ * Version:           5.2.1
  * GitHub Plugin URI: https://github.com/cgcookie/cgc-loveit
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Set some constants
-define('CGC_LOVEIT_VERSION', '5.2');
+define('CGC_LOVEIT_VERSION', '5.2.1');
 define('CGC_LOVEIT_DIR', plugin_dir_path( __FILE__ ));
 define('CGC_LOVEIT_URL', plugins_url( '', __FILE__ ));
 
